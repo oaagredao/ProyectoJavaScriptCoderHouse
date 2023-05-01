@@ -1,4 +1,43 @@
 //Calculadora de calorias diarias gastadas
+
+// Declaro TDEE
+let TDEE;
+
+//Defino las funciones
+
+// funcion que calcula TDEE en reposo
+function TdeeReposo(peso, estatura, edad, sexo) {
+    if (sexo == "H") {
+        TDEE = ((10 * peso) + (6.25 * estatura) - (5 * edad) + 5);
+    } else if (sexo == "M") {
+        TDEE = ((10 * peso) + (6.25 * estatura) - (5 * edad) - 161);
+    } else {
+        alert("Escriba correctamente las opciones de sexo porfavor");
+    }
+}
+
+// funcion que calcula TDEE con ejercicio
+function TdeeEjercicio(ejercicio){
+    if (ejercicio == "sedentario") {
+        TDEE = TDEE * 1.2;
+    }
+    else if (ejercicio == "ligero") {
+        TDEE = TDEE * 1.375;
+    }
+    else if (ejercicio == "moderado") {
+        TDEE = TDEE * 1.55;
+    }
+    else if (ejercicio == "intenso") {
+        TDEE = TDEE * 1.725;
+    }
+    else if (ejercicio == "muyintenso") {
+        TDEE = TDEE * 1.9;
+    }
+    else {
+        alert("Ingrese un valor de ejercicio que sea correcto porfavor");
+    }
+}
+
 //Calcular el gasto calorico promedio de varias personas
 alert("¿Desea calcular las calorias promedio de varias personas? S/N")
 let respuesta = prompt("Ingrese su respuesta S/N")
@@ -8,7 +47,7 @@ if (respuesta == "S") {
     let promediocalorias = 0
     for (let i = 0; i < numerodepersonas; i++) {
         //Calcular las calorias gastadas en un dia en estado de reposo
-        let nombre = prompt(`Ingresa el nombre de la persona  ${i}`)
+        let nombre = prompt(`Ingresa el nombre de la persona  ${i+1}`)
         alert(`Hola, vamos a calcular las calorias que gasta ${nombre} en un día.`)
         alert("Para esto necesitamos que nos suministres ciertos datos")
         let edad = parseInt(prompt(`La edad de ${nombre}`))
@@ -20,36 +59,11 @@ if (respuesta == "S") {
         let ejercicio = prompt("Ingresa uno de los siguientes valores: sedentario(Si hace poco o nada de ejercicio), ligero(Si hace ejercicio ligero de 1 a 3 dias a la semana, moderado(si hace ejercicio moderado de 3 a 5 dias a la semana, intenso (Si hace ejercicio intenso de 6 a 7 dias a a la semana, muyintenso (Si hace ejercicio intenso diario)) ))")
 
         // calculo del TDEE en reposo
-        let TDEE;
-        if (sexo == "H") {
-            TDEE = ((10 * peso) + (6.25 * estatura) - (5 * edad) + 5);
-        }
-        else if (sexo == "M") {
-            TDEE = ((10 * peso) + (6.25 * estatura) - (5 * edad) - 161);
-        }
-        else {
-            alert("Escriba correctamente las opciones de sexo porfavor");
-        }
+        TdeeReposo(peso, estatura, edad, sexo)
 
         // calculo del TDEE con el ejercicio
-        if (ejercicio == "sedentario") {
-            TDEE = TDEE * 1.2;
-        }
-        else if (ejercicio == "ligero") {
-            TDEE = TDEE * 1.375;
-        }
-        else if (ejercicio == "moderado") {
-            TDEE = TDEE * 1.55;
-        }
-        else if (ejercicio == "intenso") {
-            TDEE = TDEE * 1.725;
-        }
-        else if (ejercicio == "muyintenso") {
-            TDEE = TDEE * 1.9;
-        }
-        else {
-            alert("Ingrese un valor de ejercicio que sea correcto porfavor");
-        }
+        TdeeEjercicio(ejercicio)
+
         alert(`El gasto calorico total diario de ${nombre} es de ${TDEE} calorias`);
         promediocalorias = TDEE + promediocalorias
         contador = contador + 1
@@ -72,37 +86,14 @@ else if (respuesta == "N") {
     alert("¿Que tanta actividad fisica realizas en la semana?")
     let ejercicio = prompt("Ingresa uno de los siguientes valores: sedentario(Si haces poco o nada de ejercicio), ligero(Si haces ejercicio ligero de 1 a 3 dias a la semana, moderado(si haces ejercicio moderado de 3 a 5 dias a la semana, intenso (Si haces ejercicio intenso de 6 a 7 dias a a la semana, muyintenso (Si haces ejercicio intenso diario)) ))")
 
+
     // calculo del TDEE en reposo
-    let TDEE;
-    if (sexo == "H") {
-        TDEE = ((10 * peso) + (6.25 * estatura) - (5 * edad) + 5);
-    }
-    else if (sexo == "M") {
-        TDEE = ((10 * peso) + (6.25 * estatura) - (5 * edad) - 161);
-    }
-    else {
-        alert("Escriba correctamente las opciones de sexo porfavor");
-    }
+    TdeeReposo(peso, estatura, edad, sexo)
+
 
     // calculo del TDEE con el ejercicio
-    if (ejercicio == "sedentario") {
-        TDEE = TDEE * 1.2;
-    }
-    else if (ejercicio == "ligero") {
-        TDEE = TDEE * 1.375;
-    }
-    else if (ejercicio == "moderado") {
-        TDEE = TDEE * 1.55;
-    }
-    else if (ejercicio == "intenso") {
-        TDEE = TDEE * 1.725;
-    }
-    else if (ejercicio == "muyintenso") {
-        TDEE = TDEE * 1.9;
-    }
-    else {
-        alert("Ingrese un valor de ejercicio que sea correcto porfavor");
-    }
+    TdeeEjercicio(ejercicio)
+
     alert(`El gasto calorico total diario de ${nombre} es de ${TDEE} calorias`);
 }
 else {
