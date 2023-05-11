@@ -1,3 +1,4 @@
+/*
 //Calculadora de calorias diarias gastadas
 
 // Declaro TDEE
@@ -149,3 +150,91 @@ else if(respuestavervector==="N"){
 else{
     alert("Escriba una opcion correcta")
 }
+*/
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Calculadora de calorias diarias gastadas
+
+
+
+// agregaré la funcionalidad para la pagina de recoleccionDatos
+if (document.title === "Recolección de Datos") {
+    // Código específico para la página 1
+
+    // lo primero es importar el formulario en una constante
+    // se almacena en una constante con el metodo getElementById Y EL ID del formulario
+    const formulario = document.getElementById('formulariodatos');
+
+    // el boton submit hace que la pagina se recargue cuando se oprime
+    // entonces cancelamos esa caracteristica con:
+    // al cancelar la caracteristica, todo lo que se coloque dentro se va a ejecutar
+    formulario.addEventListener('submit', function (event) {
+        // esto evita que el submit haga lo que hace default que es recargar
+        event.preventDefault();
+
+        // debo llamar los valores del formulario y colocarlos en variables
+        // uso el metodo querySelector() para llamar el valor del elemento con un id especifico
+        const nombre = formulario.querySelector('#pregunta1').value;
+        const edad = parseInt(formulario.querySelector('#pregunta2').value);
+        const estatura = parseInt(formulario.querySelector('#pregunta3').value);
+        const peso = parseInt(formulario.querySelector('#pregunta4').value);
+        const sexo = formulario.querySelector('#pregunta5').value;
+        const ejercicio = formulario.querySelector('#pregunta6').value;
+
+
+        // Declaro TDEE
+        let TDEE;
+
+        //Defino las funciones
+
+        // funcion que calcula TDEE en reposo
+        function TdeeReposo(peso, estatura, edad, sexo) {
+            if (sexo == "H") {
+                TDEE = ((10 * peso) + (6.25 * estatura) - (5 * edad) + 5);
+            } else if (sexo == "M") {
+                TDEE = ((10 * peso) + (6.25 * estatura) - (5 * edad) - 161);
+            } 
+        }
+
+        // funcion que calcula TDEE con ejercicio
+        function TdeeEjercicio(ejercicio) {
+            if (ejercicio == "sedentario") {
+                TDEE = TDEE * 1.2;
+            }
+            else if (ejercicio == "ligero") {
+                TDEE = TDEE * 1.375;
+            }
+            else if (ejercicio == "moderado") {
+                TDEE = TDEE * 1.55;
+            }
+            else if (ejercicio == "intenso") {
+                TDEE = TDEE * 1.725;
+            }
+            else if (ejercicio == "muyintenso") {
+                TDEE = TDEE * 1.9;
+            }
+        }
+
+        // calculo del TDEE en reposo
+        TdeeReposo(peso, estatura, edad, sexo);
+
+        // calculo del TDEE con el ejercicio
+        TdeeEjercicio(ejercicio);
+
+        // mostrar el TDEE calculado en el html
+        const resultado= document.getElementById('gastocalorico');
+        resultado.textContent=TDEE
+
+
+    });
+}
+
+// agregaré la funcionalidad para la pagina de diseñoDieta
+if (document.title === "Diseño de dieta") {
+    // Código específico para la página 1
+    console.log("Funcionalidad de la página 2");
+}
+
+
