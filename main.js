@@ -40,40 +40,98 @@ function TdeeEjercicio(ejercicio) {
 }
 // Defino el constructor de objetos
 class DatosPersona {
-    constructor(nombre, edad, estatura, peso, sexo, ejercicio,TDEE) {
-      this.nombre = nombre;
-      this.edad = edad;
-      this.estatura = estatura;
-      this.peso = peso;
-      this.sexo = sexo;
-      this.ejercicio = ejercicio;
-      this.TDEE = TDEE;
+    constructor(nombre, edad, estatura, peso, sexo, ejercicio, TDEE) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.estatura = estatura;
+        this.peso = peso;
+        this.sexo = sexo;
+        this.ejercicio = ejercicio;
+        this.TDEE = TDEE;
     }
-  }
+}
 // defino al vector de vectores que almacena los vectores con las variables de las personas
 const vectorDatosPersonas = [];
 
 
-//Calcular el gasto calorico promedio de varias personas
-alert("¿Desea calcular las calorias promedio de varias personas? S/N")
-let respuesta = prompt("Ingrese su respuesta S/N")
-if (respuesta == "S") {
-    let numerodepersonas = parseInt(prompt("Ingresa el numero de personas a las que quieres calcular el promedio de su gasto calorico diario"))
-    let contador = 0
-    let promediocalorias = 0
-    for (let i = 0; i < numerodepersonas; i++) {
-        //Calcular las calorias gastadas en un dia en estado de reposo
-        let nombre = prompt(`Ingresa el nombre de la persona  ${i + 1}`)
-        alert(`Hola, vamos a calcular las calorias que gasta ${nombre} en un día.`);
-        alert("Para esto necesitamos que nos suministres ciertos datos");
-        let edad = parseInt(prompt(`La edad de ${nombre}`));
-        let estatura = parseInt(prompt(`Ingresa la estatura de ${nombre} en centimetros, ejemplo:(175)`));
-        let peso = parseInt(prompt(`Ingresa el peso de ${nombre} en kilogramos, ejemplo:(70)`));
-        let sexo = prompt(`¿ ${nombre} es hombre o mujer?, ingresar (H para hombre, M para mujer)`);
-        alert("Ya casi estamos, solo necesitamos que nos colabores con un ultimo dato");
-        alert(`¿Que tanta actividad fisica realiza ${nombre} en la semana?`);
-        let ejercicio = prompt("Ingresa uno de los siguientes valores: sedentario(Si hace poco o nada de ejercicio), ligero(Si hace ejercicio ligero de 1 a 3 dias a la semana, moderado(si hace ejercicio moderado de 3 a 5 dias a la semana, intenso (Si hace ejercicio intenso de 6 a 7 dias a a la semana, muyintenso (Si hace ejercicio intenso diario)) ))");
 
+// Funcion para mostrar el vector de objetos con los datos
+//defino el vector de los nombres ingresados
+let nombresIngresados = [];
+// mostrar los nombres de las personas registradas
+function mostrarNombresPersonasVectorDatos() {
+    nombresIngresados = vectorDatosPersonas.map(item => item.nombre)
+}
+
+
+// Funcion para mostrar el vector de objetos con los datos
+function mostrarObjetosRegistradosEnVectorDatos() {
+    for (let i = 0; i < vectorDatosPersonas.length; i++) {
+        alert(`El nombre de la persona ${i + 1} es: ${vectorDatosPersonas[i].nombre}, su edad es: ${vectorDatosPersonas[i].edad}`)
+        alert(`Su estatura es de: ${vectorDatosPersonas[i].estatura}, su peso es de: ${vectorDatosPersonas[i].peso}`)
+        alert(`Su sexo es de ${vectorDatosPersonas[i].sexo}, la intensidad del ejercicio que realiza es: ${vectorDatosPersonas[i].ejercicio}`)
+        alert(`Y las calorias totales que gasta por día son: ${Math.round(vectorDatosPersonas[i].TDEE)}`)
+    }
+}
+
+// Funcion para buscar con el metodo filter en un arreglo
+
+// defino el vector que almacenará los datos del nombre buscado
+let filtroNombre = [];
+// defino una funcion para buscar en el vector de nombres
+function filtroBuscarNombreEnVectorDatos(nombre) {
+    // define el vector de datos 
+    filtroNombre = vectorDatosPersonas.filter((item) => item.nombre.includes(nombre));
+}
+
+// Funcion que guarda el vector de Datos de personas en el local storage
+
+function guardarVectorDatosPersonasLocalStorage(){
+    localStorage.setItem("vectorDatosPersonas",JSON.stringify(vectorDatosPersonas));
+}
+
+
+// Funcion que toma el vector de datos personas desde el local storage
+
+function traerVectorDatosPersonasLocalStorage(){
+    // creo un vector auxiliar para guardar los datos que se traen desde el local storage
+    // uso la clave que asignamos en la funcion guardar datos del local storage que es  "vectorDatosPersonas"
+    const guardarDatos=localStorage.getItem("vectorDatosPersonas");
+
+    // el vector tiene los datos en forma de string, hay que pasarlos a array y objetos
+    // este if verifica que si guardar datos tiene datos, entonces estos son strings que no han sido pasados a array o objetos
+    if (guardarDatos){
+        vectorDatosPersonas=JSON.parse(guardarDatos);
+        // entonces lleno el vector datos personas con los datos traidos desde el local storage y los convierto en arrays y objetos
+    }
+
+}
+
+//Calcular el gasto calorico promedio de varias personas
+
+// agregaré la funcionalidad para la pagina de recoleccionDatos
+if (document.title === "Recolección de Datos") {
+    // Código específico para la página 1
+
+    // lo primero es importar el formulario en una constante
+    // se almacena en una constante con el metodo getElementById Y EL ID del formulario
+    const formulario = document.getElementById('formulariodatos');
+
+    // el boton submit hace que la pagina se recargue cuando se oprime
+    // entonces cancelamos esa caracteristica con:
+    // al cancelar la caracteristica, todo lo que se coloque dentro se va a ejecutar
+    formulario.addEventListener('submit', function (event) {
+        // esto evita que el submit haga lo que hace default que es recargar
+        event.preventDefault();
+
+        // debo llamar los valores del formulario y colocarlos en variables
+        // uso el metodo querySelector() para llamar el valor del elemento con un id especifico
+        nombre = formulario.querySelector('#pregunta1').value;
+        edad = parseInt(formulario.querySelector('#pregunta2').value);
+        estatura = parseInt(formulario.querySelector('#pregunta3').value);
+        peso = parseInt(formulario.querySelector('#pregunta4').value);
+        sexo = formulario.querySelector('#pregunta5').value;
+        ejercicio = formulario.querySelector('#pregunta6').value;
 
         // calculo del TDEE en reposo
         TdeeReposo(peso, estatura, edad, sexo);
@@ -81,73 +139,77 @@ if (respuesta == "S") {
         // calculo del TDEE con el ejercicio
         TdeeEjercicio(ejercicio);
 
-        // creo el objeto que se irá llenando con los datos de las personas vuelta por vuelta
-        const persona= new DatosPersona(nombre, edad, estatura, peso, sexo, ejercicio,TDEE)
+        // creo el objeto que se irá llenando con los datos de las personas 
+        const persona = new DatosPersona(nombre, edad, estatura, peso, sexo, ejercicio, TDEE)
         // en esta linea se usa el metodo push para incluir uno tras otro los objetos generados
         vectorDatosPersonas.push(persona)
 
-        alert(`El gasto calorico total diario de ${nombre} es de ${TDEE} calorias`);
-        promediocalorias = TDEE + promediocalorias;
-        contador = contador + 1;
-    }
-    promediocalorias = (promediocalorias / contador)
-    alert(`El promedio de calorias de las personas ingresadas es de ${promediocalorias}`);
-}
-else if (respuesta == "N") {
-    alert("Vamos a calcular las calorias diarias gastadas solo de una persona")
-    // Calculadora de calorias
-    //Calcular las calorias gastadas en un dia en estado de reposo
-    let nombre = prompt("Ingresa tu nombre")
-    alert(`Hola ${nombre}, vamos a calcular las calorias que gastas en un día.`)
-    alert("Para esto necesitamos que nos suministres ciertos datos")
-    let edad = parseInt(prompt("Ingresa tu edad"))
-    let estatura = parseInt(prompt("Ingresa tu estatura en centimetros, ejemplo:(175)"))
-    let peso = parseInt(prompt("Ingresa tu peso en kilogramos, ejemplo:(70)"))
-    let sexo = prompt("¿Eres hombre o mujer?, ingresar (H para hombre, M para mujer)")
-    alert("Ya casi estamos, solo necesitamos que nos colabores con un ultimo dato")
-    alert("¿Que tanta actividad fisica realizas en la semana?")
-    let ejercicio = prompt("Ingresa uno de los siguientes valores: sedentario(Si haces poco o nada de ejercicio), ligero(Si haces ejercicio ligero de 1 a 3 dias a la semana, moderado(si haces ejercicio moderado de 3 a 5 dias a la semana, intenso (Si haces ejercicio intenso de 6 a 7 dias a a la semana, muyintenso (Si haces ejercicio intenso diario)) ))")
+        // mostrar el TDEE calculado en el html
+        // en resultado guardo el elemento del id gastocalorico, en este caso es un p
+        const resultado = document.getElementById('gastocalorico');
+        // con text.Content puedo modificar el valor de ese texto a en este caso el valor de TDEE
+        resultado.textContent = TDEE
 
 
+        // Hasta alli al hacer click en el boton se calcula el TDEE y se guarda el objeto en un vector, el vector datos persona
 
-    // calculo del TDEE en reposo
-    TdeeReposo(peso, estatura, edad, sexo);
+        //Ahora lo que quiero hacer es que el vector datos persona se guarde en el local storage y si alguien ya ha ingresado antes, pueda ver sus datos sin tener que volver a ingresar todo
 
+        // llamo a la funcion que guarda el vector datos persona en el local storage
+        guardarVectorDatosPersonasLocalStorage();
 
-    // calculo del TDEE con el ejercicio
-    TdeeEjercicio(ejercicio);
+    });
 
-    alert(`El gasto calorico total diario de ${nombre} es de ${TDEE} calorias`);
-}
-else {
-    alert("Debe ingresar una respuesta valida");
+    // tengo un boton con la propiedad disabled debajo del calculo de calorias
+    // activo el id de activarboton, que muestra el boton oculto debajo del calculo de calorias
+    const activarBoton = document.getElementById('activarBoton');
+    activarBoton.addEventListener('click', function () {
+        // llamas al boton oculto dentro de esta funcion para cambiar disabled en false y asi poder verlo
+        const botonOculto = document.getElementById('botonOculto');
+        botonOculto.disabled = false;
+        botonOculto.style.display = `inline`;
+    });
 }
 
+// agrego la funcionalidad para la pagina que muestra los datos almacenados y calculados
 
-// Seccion para mostrar el vector de objetos con los datos
-alert("¿Te gustaría ver los datos registrados de las personas?")
-let respuestavervector=prompt("Ingresa tu respuesta Si (S) o NO (N)")
+else if(document.title==="leerDatosCalculados"){
 
-if(respuestavervector==="S"){
-    // mostrar los nombres de las personas registradas
-    alert("Estas son las personas que registraron sus datos:")
-    // uso el metodo map para sacar en otro vector llamado nombresIngresados los items.nombre
-    const nombresIngresados=vectorDatosPersonas.map(item=>item.nombre)
-    alert(nombresIngresados)
+    // llamamos a la funcion que llena el vector de datos personas con lo guardado en el localstorage
+    traerVectorDatosPersonasLocalStorage();
+    // con esto el vector de datos personas ahora está lleno con la informacion guardada en el local storage
 
-    // con esto muestro todos los datos de los vectores
-    alert(`Este es el vector de datos registrados`)
-    for (i=0;i<vectorDatosPersonas.length;i++){
-        alert(`El nombre de la persona ${i+1} es: ${vectorDatosPersonas[i].nombre}, su edad es: ${vectorDatosPersonas[i].edad}`)
-        alert(`Su estatura es de: ${vectorDatosPersonas[i].estatura}, su peso es de: ${vectorDatosPersonas[i].peso}`)
-        alert(`Su sexo es de ${vectorDatosPersonas[i].sexo}, la intensidad del ejercicio que realiza es: ${vectorDatosPersonas[i].ejercicio}`)
-        alert(`Y las calorias totales que gasta por día son: ${vectorDatosPersonas[i].TDEE}`)
-    }
+    // linkear esto con la pagina y hacer que cuando escriban su nombre (con includes) puedan acceder a sus datos
+
+    // debo traer el boton que está en la pagina donde se consultan los datos y luego le agrego un evento para leer los nombres y mostrar los datos del vector datos personas
+    const botonConsultarDatos=document.getElementById("botonConsultarDatos");
+    botonConsultarDatos.addEventListener(`click`,function(event){
+        /*
+        // traigo al input de la pagina donde registran el nombre
+        const nombreConsultarDatos=document.getElementById("ingresarNombre");
+        // le paso el nombre traido de la pagina a la funcion para que esta tome los objetos que correspondan a ese nombre del vectorDatos personas y lo coloque en el vector filtroNombre[]
+        filtroBuscarNombreEnVectorDatos(nombreConsultarDatos);
+        // tengo un vector de datos con un objeto
+        */
+        // se dede mostrar el html oculto de la pagina leerDatosCalculados
+        // obtengo el div que estaba en modo oculto
+        const divOcultoLeerDatosCalculados=document.getElementById("divOcultoleerDatosCalculados");
+
+        // quito la clase que oculta el div, la clase es "oculto"
+        divOcultoLeerDatosCalculados.classList.remove("oculto")
+
+
+    })
+
+    
+
+
 }
-else if(respuestavervector==="N"){
-    alert("Entendido")
-}
-else{
-    alert("Escriba una opcion correcta")
-}
+
+
+
+
+
+
+
 

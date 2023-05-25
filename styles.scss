@@ -12,7 +12,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
 
 
     section {
@@ -84,6 +84,16 @@ main {
         flex-direction: column;
         align-items: center;
     }
+    // clase oculta
+    .oculto{
+        display: none;
+    }
+}
+.bloquerow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 // estilos comunes
@@ -92,10 +102,13 @@ main {
     display: inline-block;
     padding: 10px 20px;
     background-color: rgba(255, 255, 255, 0.349);
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 4px;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+    margin: 5px;
 }
+
+

@@ -11,7 +11,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
 }
 main section p {
   width: 75%;
@@ -72,17 +72,28 @@ main form {
   flex-direction: column;
   align-items: center;
 }
+.titulo .oculto {
+  display: none;
+}
+
+.bloquerow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
 
 .btn {
   display: inline-block;
   padding: 10px 20px;
   background-color: rgba(255, 255, 255, 0.349);
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 4px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  margin: 5px;
 }
 
 /*# sourceMappingURL=styles.css.map */
