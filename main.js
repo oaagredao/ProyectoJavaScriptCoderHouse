@@ -51,7 +51,7 @@ class DatosPersona {
     }
 }
 // defino al vector de vectores que almacena los vectores con las variables de las personas
-const vectorDatosPersonas = [];
+let vectorDatosPersonas = [];
 
 
 
@@ -96,7 +96,7 @@ function guardarVectorDatosPersonasLocalStorage(){
 function traerVectorDatosPersonasLocalStorage(){
     // creo un vector auxiliar para guardar los datos que se traen desde el local storage
     // uso la clave que asignamos en la funcion guardar datos del local storage que es  "vectorDatosPersonas"
-    const guardarDatos=localStorage.getItem("vectorDatosPersonas");
+    let guardarDatos=localStorage.getItem("vectorDatosPersonas");
 
     // el vector tiene los datos en forma de string, hay que pasarlos a array y objetos
     // este if verifica que si guardar datos tiene datos, entonces estos son strings que no han sido pasados a array o objetos
@@ -115,61 +115,69 @@ if (document.title === "Recolección de Datos") {
 
     // lo primero es importar el formulario en una constante
     // se almacena en una constante con el metodo getElementById Y EL ID del formulario
-    const formulario = document.getElementById('formulariodatos');
+    let formulario = document.getElementById('formulariodatos');
 
     // el boton submit hace que la pagina se recargue cuando se oprime
     // entonces cancelamos esa caracteristica con:
     // al cancelar la caracteristica, todo lo que se coloque dentro se va a ejecutar
-    formulario.addEventListener('submit', function (event) {
-        // esto evita que el submit haga lo que hace default que es recargar
-        event.preventDefault();
-
-        // debo llamar los valores del formulario y colocarlos en variables
-        // uso el metodo querySelector() para llamar el valor del elemento con un id especifico
-        nombre = formulario.querySelector('#pregunta1').value;
-        edad = parseInt(formulario.querySelector('#pregunta2').value);
-        estatura = parseInt(formulario.querySelector('#pregunta3').value);
-        peso = parseInt(formulario.querySelector('#pregunta4').value);
-        sexo = formulario.querySelector('#pregunta5').value;
-        ejercicio = formulario.querySelector('#pregunta6').value;
-
-        // calculo del TDEE en reposo
-        TdeeReposo(peso, estatura, edad, sexo);
-
-        // calculo del TDEE con el ejercicio
-        TdeeEjercicio(ejercicio);
-
-        // creo el objeto que se irá llenando con los datos de las personas 
-        const persona = new DatosPersona(nombre, edad, estatura, peso, sexo, ejercicio, TDEE)
-        // en esta linea se usa el metodo push para incluir uno tras otro los objetos generados
-        vectorDatosPersonas.push(persona)
-
-        // mostrar el TDEE calculado en el html
-        // en resultado guardo el elemento del id gastocalorico, en este caso es un p
-        const resultado = document.getElementById('gastocalorico');
-        // con text.Content puedo modificar el valor de ese texto a en este caso el valor de TDEE
-        resultado.textContent = TDEE
 
 
-        // Hasta alli al hacer click en el boton se calcula el TDEE y se guarda el objeto en un vector, el vector datos persona
-
-        //Ahora lo que quiero hacer es que el vector datos persona se guarde en el local storage y si alguien ya ha ingresado antes, pueda ver sus datos sin tener que volver a ingresar todo
-
-        // llamo a la funcion que guarda el vector datos persona en el local storage
-        guardarVectorDatosPersonasLocalStorage();
-
-    });
+    // debo agregar un if que valide primero si el elemento formulario existe:
+    if (formulario){
+        formulario.addEventListener('submit', function (event) {
+            // esto evita que el submit haga lo que hace default que es recargar
+            event.preventDefault();
+    
+            // debo llamar los valores del formulario y colocarlos en variables
+            // uso el metodo querySelector() para llamar el valor del elemento con un id especifico
+            nombre = formulario.querySelector('#pregunta1').value;
+            edad = parseInt(formulario.querySelector('#pregunta2').value);
+            estatura = parseInt(formulario.querySelector('#pregunta3').value);
+            peso = parseInt(formulario.querySelector('#pregunta4').value);
+            sexo = formulario.querySelector('#pregunta5').value;
+            ejercicio = formulario.querySelector('#pregunta6').value;
+    
+            // calculo del TDEE en reposo
+            TdeeReposo(peso, estatura, edad, sexo);
+    
+            // calculo del TDEE con el ejercicio
+            TdeeEjercicio(ejercicio);
+    
+            // creo el objeto que se irá llenando con los datos de las personas 
+            let persona = new DatosPersona(nombre, edad, estatura, peso, sexo, ejercicio, TDEE)
+            // en esta linea se usa el metodo push para incluir uno tras otro los objetos generados
+            vectorDatosPersonas.push(persona)
+    
+            // mostrar el TDEE calculado en el html
+            // en resultado guardo el elemento del id gastocalorico, en este caso es un p
+            let resultado = document.getElementById('gastocalorico');
+            // con text.Content puedo modificar el valor de ese texto a en este caso el valor de TDEE
+            resultado.textContent = TDEE
+    
+    
+            // Hasta alli al hacer click en el boton se calcula el TDEE y se guarda el objeto en un vector, el vector datos persona
+    
+            //Ahora lo que quiero hacer es que el vector datos persona se guarde en el local storage y si alguien ya ha ingresado antes, pueda ver sus datos sin tener que volver a ingresar todo
+    
+            // llamo a la funcion que guarda el vector datos persona en el local storage
+            guardarVectorDatosPersonasLocalStorage();
+    
+        });
+    }
 
     // tengo un boton con la propiedad disabled debajo del calculo de calorias
     // activo el id de activarboton, que muestra el boton oculto debajo del calculo de calorias
     const activarBoton = document.getElementById('activarBoton');
-    activarBoton.addEventListener('click', function () {
-        // llamas al boton oculto dentro de esta funcion para cambiar disabled en false y asi poder verlo
-        const botonOculto = document.getElementById('botonOculto');
-        botonOculto.disabled = false;
-        botonOculto.style.display = `inline`;
-    });
+    if(activarBoton){
+        activarBoton.addEventListener('click', function () {
+            // llamas al boton oculto dentro de esta funcion para cambiar disabled en false y asi poder verlo
+            const botonOculto = document.getElementById('botonOculto');
+            botonOculto.disabled = false;
+            botonOculto.style.display = `inline`;
+        });
+    }
 }
+// hasta aca funciona
 
 // agrego la funcionalidad para la pagina que muestra los datos almacenados y calculados
 
@@ -184,21 +192,46 @@ else if(document.title==="leerDatosCalculados"){
     // debo traer el boton que está en la pagina donde se consultan los datos y luego le agrego un evento para leer los nombres y mostrar los datos del vector datos personas
     const botonConsultarDatos=document.getElementById("botonConsultarDatos");
     botonConsultarDatos.addEventListener(`click`,function(event){
-        /*
+         // vemos si el vector datos personas tiene algo
+         console.log(vectorDatosPersonas);
+        
+
+        
         // traigo al input de la pagina donde registran el nombre
-        const nombreConsultarDatos=document.getElementById("ingresarNombre");
+        const nombreConsultarDatos=document.getElementById("ingresarNombre").value;
+        console.log(nombreConsultarDatos);
+        // AQUI ESTA EL PROBLEMA
+
         // le paso el nombre traido de la pagina a la funcion para que esta tome los objetos que correspondan a ese nombre del vectorDatos personas y lo coloque en el vector filtroNombre[]
         filtroBuscarNombreEnVectorDatos(nombreConsultarDatos);
         // tengo un vector de datos con un objeto
-        */
+        
+       
         // se dede mostrar el html oculto de la pagina leerDatosCalculados
         // obtengo el div que estaba en modo oculto
         const divOcultoLeerDatosCalculados=document.getElementById("divOcultoleerDatosCalculados");
 
         // quito la clase que oculta el div, la clase es "oculto"
         divOcultoLeerDatosCalculados.classList.remove("oculto")
+        console.log(`Esto si se está ejecutando`);
+        
+        // debo traer todos los p que se acaban de mostrar en el div oculto y les asigno el valor del objeto correspondiente al nombre
 
+        const pMostrarEdad=document.getElementById("mostrarDatoEdad");
+        const pMostrarEstatura=document.getElementById("mostrarDatoEstatura");
+        const pMostrarPeso=document.getElementById("mostrarDatoPeso");
+        const pMostrarSexo=document.getElementById("mostrarDatoSexo");
+        const pMostrarEjercicio=document.getElementById("mostrarDatoEjercicio");
+        const pMostrarTdee=document.getElementById("mostrarDatoTdee");
 
+        // ahora a esos p que he traido, les asigno el valor almacenado en el vector de datos
+        pMostrarEdad.textContent=filtroNombre[0].edad
+        pMostrarEstatura.textContent=filtroNombre[0].estatura
+        pMostrarPeso.textContent=filtroNombre[0].peso
+        pMostrarSexo.textContent=filtroNombre[0].sexo
+        pMostrarEjercicio.textContent=filtroNombre[0].ejercicio
+        pMostrarTdee.textContent=filtroNombre[0].TDEE        
+       
     })
 
     
