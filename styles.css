@@ -3,6 +3,10 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+h1 {
+  width: 70%;
+}
+
 a {
   text-decoration: none;
 }
@@ -74,6 +78,16 @@ main form {
 }
 .titulo .oculto {
   display: none;
+}
+.titulo .partetituloDivOculto {
+  background: linear-gradient(to bottom, #FAD2E1, #FFFFFF);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+  border: 1px solid rgb(240, 137, 137);
 }
 
 .bloquerow {
