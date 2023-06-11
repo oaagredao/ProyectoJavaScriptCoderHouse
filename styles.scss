@@ -1,5 +1,6 @@
+
 body {
-    background-color: #FFE5D4;
+    background: linear-gradient(to top, #FAD2E1 65%, #FFFFFF);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -17,6 +18,8 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 100%;
+    min-height: 500px;
 
 
     section {
@@ -79,6 +82,7 @@ main {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
 
     .partetitulo {
         background-color: #FAD2E1;
@@ -102,7 +106,6 @@ main {
         flex-direction: column;
         align-items: center;
         margin-top: 70px;
-        border: 1px solid rgb(240, 137, 137);
     }
 }
 
