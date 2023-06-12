@@ -106,6 +106,26 @@ function traerVectorDatosPersonasLocalStorage() {
     }
 
 }
+// defino una funcion que me permite generar un toast que remueve y agrega una clase a un objeto
+function mensajeToastify(idElemento, textoMensaje, clasEliminar, claseAgregar) {
+    // se asigna el toast a una variable para ocultarlo al hacer un click en el
+    var toast = Toastify({
+        text: textoMensaje,
+        duration: -1,
+        onClick: function () {
+            // Traemos el id del elemento div al que se quiere remover y agregar clase
+            var divElementoAgregarRetirarClase = document.getElementById(idElemento);
+            // Removemos la clase del div
+            divElementoAgregarRetirarClase.classList.remove(clasEliminar);
+            // Agregamos la nueva clase al div
+            divElementoAgregarRetirarClase.classList.add(claseAgregar);
+
+            toast.hideToast(); // Oculta el toast al hacer clic
+        },
+    }).showToast();
+}
+
+
 
 //Calcular el gasto calorico promedio de varias personas
 
@@ -181,7 +201,7 @@ if (document.title === "Recolección de Datos") {
 
                 // llamo a la funcion que guarda el vector datos persona en el local storage
                 guardarVectorDatosPersonasLocalStorage();
-                
+
                 // tengo un boton con la propiedad disabled debajo del calculo de calorias
                 // activo el id de activarboton, que muestra el boton oculto debajo del calculo de calorias
                 const activarBoton = document.getElementById('activarBoton');
@@ -210,42 +230,103 @@ else if (document.title === "leerDatosCalculados") {
     // debo traer el boton que está en la pagina donde se consultan los datos y luego le agrego un evento para leer los nombres y mostrar los datos del vector datos personas
     const botonConsultarDatos = document.getElementById("botonConsultarDatos");
     botonConsultarDatos.addEventListener(`click`, function (event) {
-       
+
         // traigo al input de la pagina donde registran el nombre
         const nombreConsultarDatos = document.getElementById("ingresarNombre").value;
-    
+
         // le paso el nombre traido de la pagina a la funcion para que esta tome los objetos que correspondan a ese nombre del vectorDatos personas y lo coloque en el vector filtroNombre[]
         filtroBuscarNombreEnVectorDatos(nombreConsultarDatos);
         // tengo un vector de datos con un objeto
 
         // si el vector contiene algo entonces se continua, sino, se muestra un error porque no se encontro datos
-        if(nombreConsultarDatos){
+        if (nombreConsultarDatos) {
             // se dede mostrar el html oculto de la pagina leerDatosCalculados
-        // obtengo el div que estaba en modo oculto
-        const divOcultoLeerDatosCalculados = document.getElementById("divOcultoleerDatosCalculados");
+            // obtengo el div que estaba en modo oculto
+            const divOcultoLeerDatosCalculados = document.getElementById("divOcultoleerDatosCalculados");
 
-        // quito la clase que oculta el div, la clase es "oculto"
-        divOcultoLeerDatosCalculados.classList.remove("oculto")
-        // agrego la clase que da el estilo al div y lo muestra "partetituloDivOculto"
-        divOcultoLeerDatosCalculados.classList.add("partetituloDivOculto")
-        
-        // debo traer todos los p que se acaban de mostrar en el div oculto y les asigno el valor del objeto correspondiente al nombre
-        const pMostrarEdad = document.getElementById("mostrarDatoEdad");
-        const pMostrarEstatura = document.getElementById("mostrarDatoEstatura");
-        const pMostrarPeso = document.getElementById("mostrarDatoPeso");
-        const pMostrarSexo = document.getElementById("mostrarDatoSexo");
-        const pMostrarEjercicio = document.getElementById("mostrarDatoEjercicio");
-        const pMostrarTdee = document.getElementById("mostrarDatoTdee");
+            // quito la clase que oculta el div, la clase es "oculto"
+            divOcultoLeerDatosCalculados.classList.remove("oculto")
+            // agrego la clase que da el estilo al div y lo muestra "partetituloDivOculto"
+            divOcultoLeerDatosCalculados.classList.add("partetituloDivOculto")
 
-        // ahora a esos p que he traido, les asigno el valor almacenado en el vector de datos
-        pMostrarEdad.textContent = filtroNombre[0].edad
-        pMostrarEstatura.textContent = filtroNombre[0].estatura
-        pMostrarPeso.textContent = filtroNombre[0].peso
-        pMostrarSexo.textContent = filtroNombre[0].sexo
-        pMostrarEjercicio.textContent = filtroNombre[0].ejercicio
-        pMostrarTdee.textContent = filtroNombre[0].TDEE
+            // debo traer todos los p que se acaban de mostrar en el div oculto y les asigno el valor del objeto correspondiente al nombre
+            const pMostrarEdad = document.getElementById("mostrarDatoEdad");
+            const pMostrarEstatura = document.getElementById("mostrarDatoEstatura");
+            const pMostrarPeso = document.getElementById("mostrarDatoPeso");
+            const pMostrarSexo = document.getElementById("mostrarDatoSexo");
+            const pMostrarEjercicio = document.getElementById("mostrarDatoEjercicio");
+            const pMostrarTdee = document.getElementById("mostrarDatoTdee");
+
+            // ahora a esos p que he traido, les asigno el valor almacenado en el vector de datos
+            pMostrarEdad.textContent = filtroNombre[0].edad
+            pMostrarEstatura.textContent = filtroNombre[0].estatura
+            pMostrarPeso.textContent = filtroNombre[0].peso
+            pMostrarSexo.textContent = filtroNombre[0].sexo
+            pMostrarEjercicio.textContent = filtroNombre[0].ejercicio
+            pMostrarTdee.textContent = filtroNombre[0].TDEE
+
+            // le asigno el valor del vector de nombres al TDEE para que esté definido
+            TDEE = filtroNombre[0].TDEE
+
+            // muestro el mensaje toastify
+            mensajeToastify("divOcultoMostrarDieta", "Haz click aquí para ver dietas sugeridas", "oculto", "partetituloDivOculto")
+
+            // aqui debe seguir el codigo de mostrar una dieta asignando una de las dietas de acuerdo al valor del TDEE
+            // traer la lista de objetos con las dietas en el json y comparar una a una si el valor de calorias es cercano o no al TDEE del usuario
+
+            // defino la varibale objeto elegido que será el objeto a mostrar en la dieta
+            let objetoElegidoMostrarDieta;
+
+            // hago el ciclo para elegir el objeto que corresponda al TDEE o sea cercano
+            fetch(`../datosDietas.json`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(item => {
+                        // defino una variable para la diferencia
+                        let diferencia = Math.abs(item.calorias - TDEE);
+                        console.log(diferencia);
+                        if (diferencia <= 100) {
+                            objetoElegidoMostrarDieta = item;
+                        }
+                        else {
+                            if (TDEE <= 1500) {
+                                objetoElegidoMostrarDieta = data[0];
+                            }
+                            else if (TDEE >= 3500) {
+                                objetoElegidoMostrarDieta = data[10];
+
+                            }
+                        }
+                    })
+                    // las acciones deben realizarse dentro del segundo then cuando la asincronia se completó
+                    console.log("array elegido");
+                    console.log(objetoElegidoMostrarDieta);
+                    // debo asignar los valores del objeto que es una dieta al html
+
+                    // traigo el span para mostrar las calorias de la dieta de ejemplo
+                    let spanMostrarCaloriasDieta=document.getElementById("spanMostrarCaloriasDieta");
+
+                    // traigo todos los p a los que les daré los valores de la dieta
+                    let mostrarDietaDesayuno=document.getElementById("mostrarDatoDesayuno");
+                    let mostrarDietaMediaMañana=document.getElementById("mostrarDatoMediaMañana");
+                    let mostrarDietaAlmuerzo=document.getElementById("mostrarDatoAlmuerzo");
+                    let mostrarDietaMediaTarde=document.getElementById("mostrarDatoMediaTarde");
+                    let mostrarDietaCena=document.getElementById("mostrarDatoCena");
+
+                    // le asigno el valor de las calorias de la dieta mostrada que sirve de ejemplo
+                    spanMostrarCaloriasDieta.textContent=objetoElegidoMostrarDieta.calorias;
+                
+                    // le asigno los valores del objeto objetoElegidoMostrarDieta
+
+                    mostrarDietaDesayuno.textContent=objetoElegidoMostrarDieta.desayuno;
+                    mostrarDietaMediaMañana.textContent=objetoElegidoMostrarDieta.mediaMañana;
+                    mostrarDietaAlmuerzo.textContent=objetoElegidoMostrarDieta.almuerzo;
+                    mostrarDietaMediaTarde.textContent=objetoElegidoMostrarDieta.mediaTarde;
+                    mostrarDietaCena.textContent=objetoElegidoMostrarDieta.cena;
+                })
+
         }
-        else{
+        else {
             // una alerta que diga que no se encontró dicho nombre
             Swal.fire({
                 title: 'Error',
@@ -256,17 +337,8 @@ else if (document.title === "leerDatosCalculados") {
                 imageAlt: 'Imagen de desaprovacion',
             })
         }
-
-
-        
     })
-
-
-
-
 }
-
-
 
 
 

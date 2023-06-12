@@ -1,0 +1,101 @@
+[
+  {
+    "nombre": "dieta1500",
+    "calorias": 1500,
+    "desayuno": "1 huevo revuelto, 1 tostada integral, 1 taza de fresas",
+    "mediaMañana": "1 yogur bajo en grasa, 1 puñado de nueces",
+    "almuerzo": "150 g de pechuga de pollo a la parrilla, 1/2 taza de arroz integral, 1 taza de brócoli al vapor",
+    "mediaTarde": "1 manzana, 2 cucharadas de mantequilla de maní",
+    "cena": "150 g de salmón a la plancha, ensalada mixta con vegetales y vinagreta ligera"
+  },
+  {
+    "nombre": "dieta1700",
+    "calorias": 1700,
+    "desayuno": "1 taza de avena con nueces y frutas, 1 vaso de jugo de naranja",
+    "mediaMañana": "1 batido de proteínas, 1 barra de granola",
+    "almuerzo": "150 g de pechuga de pollo a la parrilla, 1 taza de quinoa, 1 taza de vegetales salteados",
+    "mediaTarde": "1 yogur griego con miel y frutas",
+    "cena": "150 g de filete de ternera, 1 patata asada, 1 taza de espárragos a la parrilla"
+  },
+  {
+    "nombre": "dieta1900",
+    "calorias": 1900,
+    "desayuno": "1 tortilla de claras de huevo con espinacas y queso, 1 rebanada de pan integral",
+    "mediaMañana": "1 puñado de almendras, 1 fruta",
+    "almuerzo": "150 g de salmón al horno, 1/2 taza de arroz integral, 1 taza de verduras al vapor",
+    "mediaTarde": "1 yogur bajo en grasa con frutas y granola",
+    "cena": "150 g de pechuga de pollo a la parrilla, ensalada César con pollo y aderezo ligero"
+  },
+  {
+    "nombre": "dieta2100",
+    "calorias": 2100,
+    "desayuno": "2 huevos revueltos con espinacas y queso, 2 rebanadas de pan integral",
+    "mediaMañana": "1 batido de proteínas, 1 barra de granola",
+    "almuerzo": "150 g de salmón a la parrilla, 1 taza de quinoa, 1 taza de vegetales al vapor",
+    "mediaTarde": "1 yogur griego con miel y frutas, 1 puñado de nueces",
+    "cena": "150 g de pechuga de pollo a la parrilla, 1 patata asada, 1 taza de espárragos a la parrilla"
+  },
+  {
+    "nombre": "dieta2300",
+    "calorias": 2300,
+    "desayuno": "1 taza de avena con plátano y nueces, 1 vaso de jugo de naranja",
+    "mediaMañana": "1 batido de proteínas, 1 barra de granola",
+    "almuerzo": "150 g de filete de ternera, 1 taza de arroz integral, 1 taza de vegetales salteados",
+    "mediaTarde": "1 yogur bajo en grasa con frutas y granola, 1 puñado de almendras",
+    "cena": "150 g de salmón al horno, ensalada mixta con vegetales y aderezo ligero"
+  },
+  {
+    "nombre": "dieta2500",
+    "calorias": 2500,
+    "desayuno": "2 tostadas de aguacate, 1 huevo pasado por agua, 1 vaso de jugo de naranja",
+    "mediaMañana": "1 batido de proteínas, 1 puñado de nueces",
+    "almuerzo": "150 g de pechuga de pollo a la parrilla, 1 taza de pasta integral, 1 taza de verduras al vapor",
+    "mediaTarde": "1 yogur griego con miel y frutas, 1 manzana",
+    "cena": "150 g de filete de ternera, 1 patata asada, ensalada César con pollo y aderezo ligero"
+  },
+  {
+    "nombre": "dieta2700",
+    "calorias": 2700,
+    "desayuno": "2 tortillas de claras de huevo con espinacas y queso, 2 rebanadas de pan integral",
+    "mediaMañana": "1 batido de proteínas, 1 barra de granola",
+    "almuerzo": "150 g de salmón a la parrilla, 1 taza de quinoa, 1 taza de vegetales al vapor",
+    "mediaTarde": "1 yogur bajo en grasa con frutas y granola, 1 puñado de almendras",
+    "cena": "150 g de pechuga de pollo a la parrilla, 1 patata asada, 1 taza de espárragos a la parrilla"
+  },
+  {
+    "nombre": "dieta2900",
+    "calorias": 2900,
+    "desayuno": "1 taza de avena con plátano y nueces, 1 vaso de jugo de naranja",
+    "mediaMañana": "1 batido de proteínas, 1 barra de granola",
+    "almuerzo": "150 g de filete de ternera, 1 taza de arroz integral, 1 taza de vegetales salteados",
+    "mediaTarde": "1 yogur bajo en grasa con frutas y granola, 1 puñado de almendras",
+    "cena": "150 g de salmón al horno, ensalada mixta con vegetales y aderezo ligero"
+  },
+  {
+    "nombre": "dieta3100",
+    "calorias": 3100,
+    "desayuno": "2 tostadas de aguacate, 1 huevo pasado por agua, 1 vaso de jugo de naranja",
+    "mediaMañana": "1 batido de proteínas, 1 puñado de nueces",
+    "almuerzo": "150 g de pechuga de pollo a la parrilla, 1 taza de pasta integral, 1 taza de verduras al vapor",
+    "mediaTarde": "1 yogur griego con miel y frutas, 1 manzana",
+    "cena": "150 g de filete de ternera, 1 patata asada, ensalada César con pollo y aderezo ligero"
+  },
+  {
+    "nombre": "dieta3300",
+    "calorias": 3300,
+    "desayuno": "2 tortillas de claras de huevo con espinacas y queso, 2 rebanadas de pan integral",
+    "mediaMañana": "1 batido de proteínas, 1 barra de granola",
+    "almuerzo": "150 g de salmón a la parrilla, 1 taza de quinoa, 1 taza de vegetales al vapor",
+    "mediaTarde": "1 yogur bajo en grasa con frutas y granola, 1 puñado de almendras",
+    "cena": "150 g de pechuga de pollo a la parrilla, 1 patata asada, 1 taza de espárragos a la parrilla"
+  },
+  {
+    "nombre": "dieta3500",
+    "calorias": 3500,
+    "desayuno": "1 taza de avena con plátano y nueces, 1 vaso de jugo de naranja",
+    "mediaMañana": "1 batido de proteínas, 1 barra de granola",
+    "almuerzo": "150 g de filete de ternera, 1 taza de arroz integral, 1 taza de vegetales salteados",
+    "mediaTarde": "1 yogur bajo en grasa con frutas y granola, 1 puñado de almendras",
+    "cena": "150 g de salmón al horno, ensalada mixta con vegetales y aderezo ligero"
+  }
+]

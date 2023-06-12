@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>leerDatosCalculados</title>
 </head>
-
 <body>
     <main>
         <div class="titulo">
@@ -34,12 +34,26 @@
                 <h3>TDEE</h3>
                 <p id="mostrarDatoTdee">---</p>
             </div>
+            <div id="divOcultoMostrarDieta" class="oculto " >
+                <h2>Ejemplo de dieta de <span id="spanMostrarCaloriasDieta"></span> calorias para tener en cuenta</h2>
+                <h3>Desayuno</h3>
+                <p id="mostrarDatoDesayuno">---</p>
+                <h3>Media Mañana</h3>
+                <p id="mostrarDatoMediaMañana">---</p>
+                <h3>Almuerzo</h3>
+                <p id="mostrarDatoAlmuerzo">---</p>
+                <h3>Media Tarde</h3>
+                <p id="mostrarDatoMediaTarde">---</p>
+                <h3>Cena</h3>
+                <p id="mostrarDatoCena">---</p>
+            </div>
         </div>
     </main>
     <footer>
         <p>Programa hecho por Oscar Agreda: <a href="https://www.linkedin.com/in/oscar-ortiz-597179172/">Perfil de
                 LinkedIn</a></p>
     </footer>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../main.js"></script>
 </body>
