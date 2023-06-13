@@ -100,12 +100,11 @@ function traerVectorDatosPersonasLocalStorage() {
 
     // el vector tiene los datos en forma de string, hay que pasarlos a array y objetos
     // este if verifica que si guardar datos tiene datos, entonces estos son strings que no han sido pasados a array o objetos
-    if (guardarDatos) {
-        vectorDatosPersonas = JSON.parse(guardarDatos);
-        // entonces lleno el vector datos personas con los datos traidos desde el local storage y los convierto en arrays y objetos
-    }
-
+    // cambio este if por un operador avanzado
+    guardarDatos && (vectorDatosPersonas = JSON.parse(guardarDatos));
+    // entonces lleno el vector datos personas con los datos traidos desde el local storage y los convierto en arrays y objetos
 }
+
 // defino una funcion que me permite generar un toast que remueve y agrega una clase a un objeto
 function mensajeToastify(idElemento, textoMensaje, clasEliminar, claseAgregar) {
     // se asigna el toast a una variable para ocultarlo al hacer un click en el
@@ -269,6 +268,7 @@ else if (document.title === "leerDatosCalculados") {
             TDEE = filtroNombre[0].TDEE
 
             // muestro el mensaje toastify
+            // llamo a la funcion de toastify
             mensajeToastify("divOcultoMostrarDieta", "Haz click aquí para ver dietas sugeridas", "oculto", "partetituloDivOculto")
 
             // aqui debe seguir el codigo de mostrar una dieta asignando una de las dietas de acuerdo al valor del TDEE

@@ -83,6 +83,7 @@ main {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    padding: 10px;
 
     .partetitulo {
         background-color: #FAD2E1;
@@ -99,13 +100,13 @@ main {
     }
 
     .partetituloDivOculto {
-        background: linear-gradient(to bottom, #FAD2E1, #FFFFFF);
         width: 100%;
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
         margin-top: 70px;
+        padding: 10px;
     }
 }
 
@@ -129,4 +130,11 @@ main {
     text-decoration: none;
     cursor: pointer;
     margin: 5px;
+}
+// estilo color de fondo
+.rosahaciaabajo{
+    background: linear-gradient(to bottom, #FAD2E1, #FFFFFF);
+}
+.rosahaciaarriba{
+    background: linear-gradient(to top, #FAD2E1 55%, #FFFFFF);
 }
