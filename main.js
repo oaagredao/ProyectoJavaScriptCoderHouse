@@ -284,7 +284,6 @@ else if (document.title === "leerDatosCalculados") {
                     data.forEach(item => {
                         // defino una variable para la diferencia
                         let diferencia = Math.abs(item.calorias - TDEE);
-                        console.log(diferencia);
                         if (diferencia <= 100) {
                             objetoElegidoMostrarDieta = item;
                         }
@@ -299,10 +298,7 @@ else if (document.title === "leerDatosCalculados") {
                         }
                     })
                     // las acciones deben realizarse dentro del segundo then cuando la asincronia se completó
-                    console.log("array elegido");
-                    console.log(objetoElegidoMostrarDieta);
                     // debo asignar los valores del objeto que es una dieta al html
-
                     // traigo el span para mostrar las calorias de la dieta de ejemplo
                     let spanMostrarCaloriasDieta=document.getElementById("spanMostrarCaloriasDieta");
 
